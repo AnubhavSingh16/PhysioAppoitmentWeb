@@ -1,0 +1,249 @@
+/* ─────────────────────────────────────────
+   CORE PRINCIPLE — no layout reflow:
+   • All cards are the SAME fixed size always
+   • Active card grows via transform: scale()
+   • Only transition: transform, opacity,
+     box-shadow, border-color  (all GPU / repaint)
+   • NEVER animate height / width / padding
+───────────────────────────────────────── */
+
+.services-section {
+  position: relative;
+  overflow: hidden;
+  background: #3f1457;
+  padding: 80px 0 120px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.glow-blob {
+  position: absolute;
+  width: 600px;
+  height: 600px;
+  border-radius: 50%;
+  filter: blur(130px);
+  pointer-events: none;
+  z-index: 0;
+}
+.glow-left {
+  background: radial-gradient(circle, rgba(139,92,246,0.4) 0%, transparent 70%);
+  top: 5%; left: -15%;
+}
+.glow-right {
+  background: radial-gradient(circle, rgba(168,85,247,0.35) 0%, transparent 70%);
+  bottom: 0; right: -15%;
+}
+
+/* ── HEADER ── */
+.services-header {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  margin-bottom: 56px;
+  padding: 0 20px;
+}
+.services-title {
+  font-family: 'Georgia', serif;
+  font-size: clamp(2.4rem, 6vw, 4rem);
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: -0.02em;
+  margin: 0 0 14px;
+}
+.services-title-line {
+  width: 80px; height: 3px;
+  background: linear-gradient(90deg, #7c3aed, #a855f7, #c084fc);
+  border-radius: 2px;
+  margin: 0 auto 18px;
+  box-shadow: 0 0 14px rgba(168,85,247,0.8);
+}
+.services-subtitle {
+  color: rgba(255,255,255,0.4);
+  font-size: 1rem;
+  font-style: italic;
+  margin: 0;
+}
+
+/* ── SWIPER OUTER ── */
+.swiper-outer {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 1400px;
+  padding: 0 20px;
+  box-sizing: border-box;
+}
+
+.services-swiper {
+  width: 100%;
+  overflow: visible !important;
+  /* padding gives breathing room for scale(1.12) overflow */
+  padding: 60px 0 80px !important;
+}
+
+/* center-align rows so scale grows from the middle */
+.services-swiper .swiper-wrapper {
+  align-items: center !important;
+}
+
+/* ── CARD — fixed size, GPU-only transitions ── */
+.service-card {
+  position: relative;
+  background: rgba(18,6,32,0.85);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(139,92,246,0.18);
+  border-radius: 22px;
+  overflow: hidden;
+  width: 100%;
+  cursor: pointer;
+
+  /* GPU composited — zero layout reflow */
+  transition:
+    transform    0.55s cubic-bezier(0.4, 0, 0.2, 1),
+    opacity      0.55s cubic-bezier(0.4, 0, 0.2, 1),
+    box-shadow   0.55s cubic-bezier(0.4, 0, 0.2, 1),
+    border-color 0.55s cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* default non-active */
+  transform: scale(0.87);
+  opacity: 0.5;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.45);
+}
+
+/* fixed image height — never changes */
+.card-image-wrap {
+  position: relative;
+  width: 100%;
+  height: 220px;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+/* ── ACTIVE ── */
+.services-swiper .swiper-slide-active .service-card {
+  transform: scale(1.12);
+  opacity: 1;
+  border-color: rgba(168,85,247,0.6);
+  box-shadow:
+    0 24px 80px rgba(0,0,0,0.7),
+    0 0 60px rgba(139,92,246,0.4);
+}
+
+/* ── PREV + NEXT ── */
+.services-swiper .swiper-slide-prev .service-card,
+.services-swiper .swiper-slide-next .service-card {
+  transform: scale(0.94);
+  opacity: 0.7;
+  border-color: rgba(139,92,246,0.28);
+  box-shadow: 0 8px 36px rgba(0,0,0,0.5);
+}
+
+/* ── HOVER ── */
+.service-card:hover {
+  opacity: 1 !important;
+  border-color: var(--accent, #a855f7) !important;
+  box-shadow:
+    0 20px 60px rgba(0,0,0,0.65),
+    0 0 30px rgba(168,85,247,0.3) !important;
+}
+
+/* ── IMAGE ── */
+.card-image {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+.service-card:hover .card-image { transform: scale(1.05); }
+
+.card-image-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(180deg, rgba(13,0,20,0) 25%, rgba(13,0,20,0.88) 100%);
+}
+
+/* ── TAGS ── */
+.card-tags {
+  position: absolute;
+  bottom: 14px; left: 16px;
+  display: flex; gap: 7px; flex-wrap: wrap;
+}
+.card-tag {
+  background: rgba(139,92,246,0.22);
+  border: 1px solid rgba(168,85,247,0.5);
+  color: #e9d5ff;
+  font-size: 0.63rem; font-weight: 700;
+  letter-spacing: 0.09em; text-transform: uppercase;
+  padding: 3px 10px; border-radius: 999px;
+  backdrop-filter: blur(8px);
+}
+
+/* ── BODY ── */
+.card-body {
+  padding: 18px 20px 22px;
+  display: flex; flex-direction: column; gap: 9px;
+}
+.card-title {
+  font-family: 'Georgia', serif;
+  font-size: 1.15rem; font-weight: 700;
+  color: #f3e8ff; margin: 0; line-height: 1.2;
+}
+.card-desc {
+  font-size: 0.82rem;
+  color: rgba(255,255,255,0.48);
+  line-height: 1.65; margin: 0;
+}
+
+/* ── CTA ── */
+.card-cta {
+  display: inline-flex; align-items: center; gap: 6px;
+  background: none; border: none;
+  color: var(--accent, #a855f7);
+  font-size: 0.76rem; font-weight: 700;
+  letter-spacing: 0.06em; text-transform: uppercase;
+  cursor: pointer; padding: 0; margin-top: 4px;
+  transition: opacity 0.2s;
+}
+.card-cta svg { width: 13px; height: 13px; transition: transform 0.2s ease; }
+.card-cta:hover svg { transform: translateX(4px); }
+
+/* ── GLOW BORDER ── */
+.card-glow-border {
+  position: absolute; inset: 0; border-radius: 22px;
+  opacity: 0; transition: opacity 0.35s ease;
+  box-shadow: inset 0 0 0 1.5px var(--accent, #a855f7);
+  pointer-events: none;
+}
+.service-card:hover .card-glow-border { opacity: 1; }
+
+/* ── PAGINATION ── */
+.custom-pagination {
+  position: relative; z-index: 1;
+  display: flex; justify-content: center; gap: 8px;
+  margin-top: 20px;
+}
+.custom-pagination .swiper-pagination-bullet {
+  width: 8px; height: 8px;
+  background: rgba(168,85,247,0.3);
+  border-radius: 999px; opacity: 1;
+  transition: width 0.3s ease, background 0.3s ease;
+  cursor: pointer;
+}
+.custom-pagination .swiper-pagination-bullet-active {
+  width: 28px;
+  background: linear-gradient(90deg, #7c3aed, #c084fc);
+  box-shadow: 0 0 10px rgba(168,85,247,0.7);
+}
+
+/* ── MOBILE ── */
+@media (max-width: 900px) {
+  .swiper-outer { padding: 0 16px; }
+  .services-swiper { padding: 20px 0 60px !important; }
+  .service-card,
+  .services-swiper .swiper-slide-active .service-card,
+  .services-swiper .swiper-slide-prev .service-card,
+  .services-swiper .swiper-slide-next .service-card {
+    transform: scale(1) !important;
+    opacity: 1 !important;
+  }
+}
