@@ -74,7 +74,7 @@ function Care() {
             className="absolute inset-0 bg-cover bg-center"
             style={{ backgroundImage: "url('./backg4.jpg')" }}
           />
-          <div className="absolute inset-0 bg-gradient-to-br from-purple-900/80 via-purple-800/75 to-blue-900/70" />
+          <div className="absolute inset-0 bg-gradient-to-b from-purple-900/80 via-purple-800/75 to-blue-900/70" />
 
           {/* Decorative circles */}
           <div className="absolute -top-10 -right-10 w-48 h-48 rounded-full border border-white/10" />
