@@ -99,12 +99,51 @@ function ContactusPage() {
         @keyframes checkPop { 0%{transform:scale(0)} 70%{transform:scale(1.2)} 100%{transform:scale(1)} }
         .float-blob { animation: float 5s ease-in-out infinite; }
         .check-pop { animation: checkPop 0.4s cubic-bezier(0.22,1,0.36,1) forwards; }
+        @media (max-width: 900px) {
+          .contact-main {
+            grid-template-columns: 1fr !important;
+            gap: 28px !important;
+          }
+          .contact-info {
+            order: 1;
+            text-align: center;
+          }
+          .contact-info-accent {
+            margin-left: auto !important;
+            margin-right: auto !important;
+          }
+          .contact-card {
+            text-align: left;
+          }
+          .contact-form {
+            order: 2;
+          }
+        }
+        @media (max-width: 640px) {
+          .contact-hero {
+            padding: 74px 16px 88px !important;
+          }
+          .contact-main {
+            margin-top: 40px !important;
+            padding: 0 16px !important;
+          }
+          .contact-info {
+            padding: 0 4px;
+          }
+          .contact-form {
+            padding: 26px 18px !important;
+            border-radius: 20px !important;
+          }
+          .contact-form-row {
+            grid-template-columns: 1fr !important;
+          }
+        }
       `}</style>
 
       <div className="contact-page" style={{ background: "#f8f7ff", minHeight: "100vh" }}>
 
         {/* ── HERO ── */}
-        <div ref={heroRef} style={{
+        <div ref={heroRef} className="contact-hero" style={{
           background: "linear-gradient(135deg, #4f1d96 0%, #6d28d9 40%, #3b82f6 100%)",
           padding: "80px 24px 100px",
           position: "relative",
@@ -139,10 +178,10 @@ function ContactusPage() {
         </div>
 
         {/* ── MAIN CONTENT ── */}
-        <div style={{ maxWidth:1100, margin:"60px auto 0", padding:"0 24px", display:"grid", gridTemplateColumns:"1fr 1.4fr", gap:48, alignItems:"start" }}>
+        <div className="contact-main" style={{ maxWidth:1100, margin:"60px auto 0", padding:"0 24px", display:"grid", gridTemplateColumns:"1fr 1.4fr", gap:48, alignItems:"start" }}>
 
           {/* ── LEFT: contact info ── */}
-          <div ref={leftRef} style={{
+          <div ref={leftRef} className="contact-info" style={{
             opacity: leftIn ? 1 : 0,
             transform: leftIn ? "translateX(0)" : "translateX(-30px)",
             transition: "opacity 0.7s ease, transform 0.7s cubic-bezier(0.22,1,0.36,1)",
@@ -151,7 +190,7 @@ function ContactusPage() {
             <h2 style={{ fontSize:"clamp(26px,3vw,38px)", color:"#1e1b4b", margin:"0 0 14px", fontWeight:400, lineHeight:1.2 }}>
               Let's Start a Conversation
             </h2>
-            <div style={{ width:44, height:4, borderRadius:4, background:"linear-gradient(90deg,#7c3aed,#3b82f6)", marginBottom:28 }} />
+            <div className="contact-info-accent" style={{ width:44, height:4, borderRadius:4, background:"linear-gradient(90deg,#7c3aed,#3b82f6)", marginBottom:28 }} />
             <p style={{ color:"#6b7280", fontSize:15, lineHeight:1.8, marginBottom:36, fontWeight:300 }}>
               Whether you have questions about treatments, want to book a session, or simply need guidance — our team is ready to help you every step of the way.
             </p>
@@ -159,7 +198,7 @@ function ContactusPage() {
             {/* Contact cards */}
             <div style={{ display:"flex", flexDirection:"column", gap:16 }}>
               {contactCards.map((card, i) => (
-                <div key={i} style={{
+                <div key={i} className="contact-card" style={{
                   background:"#fff",
                   borderRadius:16,
                   padding:"20px 22px",
@@ -216,7 +255,7 @@ function ContactusPage() {
           </div>
 
           {/* ── RIGHT: form ── */}
-          <div ref={rightRef} style={{
+          <div ref={rightRef} className="contact-form" style={{
             opacity: rightIn ? 1 : 0,
             transform: rightIn ? "translateX(0)" : "translateX(30px)",
             transition: "opacity 0.7s ease 0.1s, transform 0.7s cubic-bezier(0.22,1,0.36,1) 0.1s",
@@ -270,7 +309,7 @@ function ContactusPage() {
                 </div>
 
                 {/* Phone + Email row */}
-                <div style={{ display:"grid", gridTemplateColumns:"1fr 1fr", gap:14 }}>
+                <div className="contact-form-row" style={{ display:"grid", gridTemplateColumns:"1fr 1fr", gap:14 }}>
                   <div>
                     <label style={{ fontSize:12, fontWeight:600, color:"#6b7280", letterSpacing:"0.06em", textTransform:"uppercase", display:"block", marginBottom:6 }}>Phone *</label>
                     <input

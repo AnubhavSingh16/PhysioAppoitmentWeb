@@ -1,11 +1,10 @@
 import React, { useEffect, useState, useRef } from "react";
 import { Link } from "react-router-dom";
-import HeaderBar from "../HeaderBar/HeaderBar";
 
 const StatCard = ({ value, label }) => (
-  <div className="flex flex-col items-start">
-    <span className="text-3xl font-extrabold text-purple-700">{value}</span>
-    <span className="text-xs font-semibold tracking-widest text-gray-400 uppercase mt-1">{label}</span>
+  <div className="flex flex-col items-start sm:items-start">
+    <span className="text-2xl sm:text-3xl font-extrabold text-purple-700">{value}</span>
+    <span className="text-[10px] sm:text-xs font-semibold tracking-[0.18em] text-gray-400 uppercase mt-1">{label}</span>
   </div>
 );
 
@@ -127,7 +126,9 @@ function InfoCard({ activeIdx }) {
       gap: 14,
       border: `1.5px solid ${icon.accent}30`,
       boxShadow: `0 8px 32px ${icon.glow}, 0 2px 10px rgba(0,0,0,0.06)`,
-      minWidth: 250,
+      minWidth: "min(250px, calc(100vw - 40px))",
+      width: "100%",
+      maxWidth: 320,
       ...cardStyle,
     }}>
       <div style={{
@@ -246,21 +247,20 @@ export default function HeroSection() {
 
   return (
     <>
-      <HeaderBar />
-      <section className="relative min-h-[90vh] flex items-center">
+      <section className="relative min-h-[90vh] flex items-center pt-16 sm:pt-20">
         <div className="absolute -top-24 -left-24 w-96 h-96 rounded-full bg-purple-100 opacity-30 blur-3xl" />
         <div className="absolute bottom-0 right-0 w-80 h-80 rounded-full bg-blue-100 opacity-40 blur-3xl" />
 
-        <div className="relative max-w-7xl mx-auto px-6 lg:px-12 mt-10 py-20 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center w-full">
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 mt-6 sm:mt-10 py-12 sm:py-16 lg:py-20 grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-12 items-center w-full overflow-hidden">
 
           {/* LEFT */}
-          <div className={`flex flex-col space-y-7 transition-all duration-700 ease-out ${visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}>
+          <div className={`flex flex-col items-center text-center lg:items-start lg:text-left space-y-6 sm:space-y-7 transition-all duration-700 ease-out ${visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}>
             <div className="inline-flex items-center space-x-2 bg-white border border-purple-200 shadow-sm rounded-full px-4 py-1.5 w-fit">
               <span className="w-2.5 h-2.5 rounded-full bg-purple-500 animate-pulse" />
               <span className="text-sm font-medium text-purple-700">24 hours availability</span>
             </div>
 
-            <h1 className="text-5xl lg:text-6xl font-bold text-gray-900 leading-tight tracking-tight">
+            <h1 className="text-3xl sm:text-4xl lg:text-6xl font-bold text-gray-900 leading-tight tracking-tight">
               Book Your{" "}
               <span className="relative inline-block text-purple-700">
                 Physio's
@@ -271,49 +271,49 @@ export default function HeroSection() {
               <br />Appointment Online!
             </h1>
 
-            <p className="text-gray-500 text-lg leading-relaxed max-w-md">
+            <p className="text-gray-500 text-base sm:text-lg leading-relaxed max-w-md">
               Find and schedule appointments with top-rated physiotherapists near you.
               Convenient, secure, and hassle-free booking for all your rehabilitation needs.
             </p>
 
-            <div className="flex flex-wrap items-center gap-4">
+            <div className="flex flex-col sm:flex-row sm:flex-wrap items-stretch sm:items-center gap-3 sm:gap-4">
               <Link to="/book-appointment">
-                <button className="bg-gradient-to-r from-purple-600 to-blue-500 text-white px-8 py-3.5 rounded-full font-semibold text-base shadow-lg hover:shadow-purple-300 hover:scale-105 transition-all duration-200">
+                <button className="w-full sm:w-auto bg-gradient-to-r from-purple-600 to-blue-500 text-white px-6 sm:px-8 py-3.5 rounded-full font-semibold text-sm sm:text-base shadow-lg hover:shadow-purple-300 hover:scale-105 transition-all duration-200">
                   Book an Appointment
                 </button>
               </Link>
-              <a href="tel:03007338601" className="flex items-center space-x-3 group">
-                <div className="w-12 h-12 rounded-full border-2 border-purple-300 flex items-center justify-center group-hover:bg-purple-50 transition">
+              <a href="tel:03007338601" className="flex items-center space-x-3 group rounded-2xl sm:rounded-none border border-purple-100 sm:border-0 p-3 sm:p-0">
+                <div className="w-11 h-11 sm:w-12 sm:h-12 rounded-full border-2 border-purple-300 flex items-center justify-center group-hover:bg-purple-50 transition">
                   <svg className="w-5 h-5 text-purple-600" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" d="M3 5a2 2 0 012-2h2.28a1 1 0 01.95.68l1.06 3.17a1 1 0 01-.23 1.04l-1.4 1.4a16.06 16.06 0 006.72 6.72l1.4-1.4a1 1 0 011.04-.23l3.17 1.06A1 1 0 0121 16.72V19a2 2 0 01-2 2h-1C9.16 21 3 14.84 3 7V6a1 1 0 010-.28V5z"/>
                   </svg>
                 </div>
                 <div>
-                  <p className="text-xs text-gray-400 font-medium">24H Emergency Contact</p>
+                  <p className="text-[11px] sm:text-xs text-gray-400 font-medium">24H Emergency Contact</p>
                   <p className="text-sm font-semibold text-gray-700">0300-7338601</p>
                 </div>
               </a>
             </div>
 
-            <div className="border-t border-gray-100 pt-6 flex items-center gap-10">
+            <div className="w-full max-w-md lg:max-w-none border-t border-gray-100 pt-6 grid grid-cols-3 gap-4 sm:flex sm:items-center sm:justify-center lg:justify-start sm:gap-10">
               <StatCard value="2k+" label="Treatments" />
-              <div className="w-px h-10 bg-gray-200" />
+              <div className="hidden sm:block w-px h-10 bg-gray-200" />
               <StatCard value="8 yrs" label="Experience" />
-              <div className="w-px h-10 bg-gray-200" />
+              <div className="hidden sm:block w-px h-10 bg-gray-200" />
               <StatCard value="2k+" label="Happy Clients" />
             </div>
           </div>
 
           {/* RIGHT */}
-          <div className={`relative flex flex-col justify-center items-center transition-all duration-700 ease-out delay-200 ${visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}>
-            <div className="relative" style={{ width: STAGE_W, height: totalStageH }}>
+<div className={`hidden lg:flex relative flex-col justify-center items-center w-full transition-all duration-700 ease-out delay-200 ${visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}>            <div className="relative flex justify-center w-full h-[350px] sm:h-[440px] lg:h-auto overflow-visible">
+              <div className="relative origin-top scale-[0.6] sm:scale-[0.78] lg:scale-100" style={{ width: STAGE_W, height: totalStageH }}>
 
               {/* SVG: glow + semicircle arc track */}
               <svg
                 className="absolute inset-0 pointer-events-none"
                 width={STAGE_W} height={totalStageH}
                 viewBox={`0 0 ${STAGE_W} ${totalStageH}`}
-                style={{ overflow: "visible" }}
+                style={{ overflow: "visible", width: "100%", height: "100%" }}
               >
                 <defs>
                   <radialGradient id="haloGrad" cx="50%" cy="50%" r="50%">
@@ -418,10 +418,11 @@ export default function HeroSection() {
                 <img src="./drAboutus.jpg" alt="Doctor" className="w-full h-full object-cover"/>
               </div>
 
+              </div>
             </div>
 
             {/* Dynamic card — normal flow, below the stage, centred */}
-            <div style={{ marginTop: '-20%', marginLeft: '50%', display: "flex", justifyContent: "center", zIndex: 30, position: "relative" }}>
+            <div className="w-full flex justify-center px-2 mt-2 sm:mt-0 lg:-mt-[12%]" style={{ zIndex: 30, position: "relative" }}>
               <InfoCard activeIdx={activeIdx} />
             </div>
           </div>

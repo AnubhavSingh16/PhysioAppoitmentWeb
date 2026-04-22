@@ -357,6 +357,9 @@ export default function Testimonial() {
 
         /* ── MOBILE ── */
         @media (max-width: 640px) {
+          .testimonial-section { padding: 64px 0 76px; }
+          .t-header { margin-bottom: 32px; padding: 0 16px; }
+          .t-subtitle { font-size: 0.92rem; line-height: 1.6; }
           .marquee-card { min-width: 260px; padding: 20px; }
           .mask-left-right {
             mask-image: none;

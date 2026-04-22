@@ -271,6 +271,43 @@
   .appointment-primary,
   .appointment-secondary {
     width: 100%;
+    display: inline-flex;
     justify-content: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .appointment-shell {
+    gap: 24px;
+    padding: 16px;
+  }
+
+  .appointment-content {
+    width: 100%;
+  }
+
+  .appointment-copy {
+    font-size: 0.94rem;
+    line-height: 1.7;
+  }
+
+  .appointment-badge {
+    max-width: 160px;
+    padding: 10px 12px;
+    border-radius: 14px;
+  }
+
+  .appointment-badge strong {
+    font-size: 0.86rem;
+  }
+
+  .appointment-badge--bottom {
+    gap: 8px;
+    max-width: 180px;
+  }
+
+  .appointment-badge--bottom span:last-child {
+    font-size: 0.8rem;
+    line-height: 1.35;
   }
 }

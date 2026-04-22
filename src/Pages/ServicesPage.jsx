@@ -292,12 +292,66 @@ export default function ServicesPage() {
         @keyframes float-b { 0%,100%{transform:translateY(0) rotate(0deg)} 50%{transform:translateY(-8px) rotate(-2deg)} }
         .fa { animation: float-a 6s ease-in-out infinite; }
         .fb { animation: float-b 7s ease-in-out infinite 1s; }
+        @media (max-width: 900px) {
+          .services-steps-grid {
+            grid-template-columns: 1fr 1fr !important;
+          }
+          .services-steps-line {
+            display: none !important;
+          }
+          .services-why-shell {
+            grid-template-columns: 1fr !important;
+            gap: 28px !important;
+            padding: 32px 24px !important;
+          }
+          .services-why-copy {
+            text-align: center;
+          }
+          .services-why-accent {
+            margin-left: auto !important;
+            margin-right: auto !important;
+          }
+        }
+        @media (max-width: 640px) {
+          .services-hero {
+            padding: 74px 16px 88px !important;
+          }
+          .services-section-shell,
+          .services-process-shell,
+          .services-why-wrap,
+          .services-cta-wrap {
+            padding-left: 16px !important;
+            padding-right: 16px !important;
+          }
+          .services-grid {
+            grid-template-columns: 1fr !important;
+            gap: 20px !important;
+          }
+          .services-steps-grid {
+            grid-template-columns: 1fr !important;
+            gap: 22px !important;
+          }
+          .services-why-shell {
+            padding: 24px 18px !important;
+          }
+          .services-why-copy {
+            order: 2;
+            text-align: center;
+          }
+          .services-why-points {
+            order: 1;
+            grid-template-columns: 1fr !important;
+          }
+          .services-cta-shell {
+            padding: 44px 20px !important;
+          }
+        }
       `}</style>
 
       <div className="services-page" style={{ background: "#f8f7ff", minHeight: "100vh" }}>
 
         {/* ── HERO ── */}
-        <div ref={heroRef} style={{
+        <div ref={heroRef} className="services-hero" style={{
           background: "linear-gradient(135deg, #4f1d96 0%, #6d28d9 40%, #3b82f6 100%)",
           padding: "90px 24px 110px",
           position: "relative",
@@ -356,7 +410,7 @@ export default function ServicesPage() {
         </div>
 
         {/* ── SERVICE GRID ── */}
-        <div style={{ maxWidth:1100, margin:"70px auto 0", padding:"0 24px" }}>
+        <div className="services-section-shell" style={{ maxWidth:1100, margin:"70px auto 0", padding:"0 24px" }}>
           <div style={{ textAlign:"center", marginBottom:56 }}>
             <p style={{ fontSize:12, fontWeight:600, color:"#7c3aed", letterSpacing:"0.12em", textTransform:"uppercase", marginBottom:12 }}>What We Offer</p>
             <h2 style={{ fontSize:"clamp(28px,3.5vw,48px)", color:"#1e1b4b", margin:"0 0 16px", fontWeight:400 }}>
@@ -367,13 +421,13 @@ export default function ServicesPage() {
             </p>
           </div>
 
-          <div style={{ display:"grid", gridTemplateColumns:"repeat(auto-fit, minmax(320px,1fr))", gap:28 }}>
+          <div className="services-grid" style={{ display:"grid", gridTemplateColumns:"repeat(auto-fit, minmax(320px,1fr))", gap:28 }}>
             {services.map((s, i) => <ServiceCard key={s.id} service={s} index={i} />)}
           </div>
         </div>
 
         {/* ── HOW IT WORKS ── */}
-        <div ref={processRef} style={{ maxWidth:1100, margin:"100px auto 0", padding:"0 24px" }}>
+        <div ref={processRef} className="services-process-shell" style={{ maxWidth:1100, margin:"100px auto 0", padding:"0 24px" }}>
           <div style={{ textAlign:"center", marginBottom:56 }}>
             <p style={{ fontSize:12, fontWeight:600, color:"#0ea5e9", letterSpacing:"0.12em", textTransform:"uppercase", marginBottom:12 }}>Simple Process</p>
             <h2 style={{ fontSize:"clamp(28px,3.5vw,46px)", color:"#1e1b4b", margin:"0 0 16px", fontWeight:400 }}>
@@ -385,9 +439,9 @@ export default function ServicesPage() {
           </div>
 
           {/* Steps row */}
-          <div style={{ position:"relative", display:"grid", gridTemplateColumns:"repeat(4,1fr)", gap:24 }}>
+          <div className="services-steps-grid" style={{ position:"relative", display:"grid", gridTemplateColumns:"repeat(4,1fr)", gap:24 }}>
             {/* Connector line */}
-            <div style={{
+            <div className="services-steps-line" style={{
               position:"absolute", top:32, left:"12.5%", right:"12.5%", height:2,
               background:"linear-gradient(90deg,#7c3aed,#0ea5e9,#10b981,#f59e0b)",
               borderRadius:2, opacity:0.3, zIndex:0,
@@ -397,8 +451,8 @@ export default function ServicesPage() {
         </div>
 
         {/* ── WHY CHOOSE US strip ── */}
-        <div style={{ maxWidth:1100, margin:"90px auto 0", padding:"0 24px" }}>
-          <div style={{
+        <div className="services-why-wrap" style={{ maxWidth:1100, margin:"90px auto 0", padding:"0 24px" }}>
+          <div className="services-why-shell" style={{
             background:"#fff",
             borderRadius:28,
             padding:"56px 48px",
@@ -410,18 +464,18 @@ export default function ServicesPage() {
             alignItems:"center",
           }}>
             {/* Left */}
-            <div>
+            <div className="services-why-copy">
               <p style={{ fontSize:12, fontWeight:600, color:"#7c3aed", letterSpacing:"0.12em", textTransform:"uppercase", marginBottom:12 }}>Why Choose Us</p>
               <h2 style={{ fontSize:"clamp(24px,3vw,40px)", color:"#1e1b4b", margin:"0 0 20px", fontWeight:400, lineHeight:1.25 }}>
                 Expert care you can trust
               </h2>
-              <div style={{ width:44, height:4, borderRadius:4, background:"linear-gradient(90deg,#7c3aed,#3b82f6)", marginBottom:24 }} />
+              <div className="services-why-accent" style={{ width:44, height:4, borderRadius:4, background:"linear-gradient(90deg,#7c3aed,#3b82f6)", marginBottom:24 }} />
               <p style={{ color:"#6b7280", fontSize:15, lineHeight:1.85, fontWeight:300, margin:0 }}>
                 Since 2011, Physio Adviser India has combined clinical excellence with genuine compassion. Every therapist on our team is highly qualified, every treatment plan is evidence-based, and every patient is treated as an individual — not a diagnosis.
               </p>
             </div>
             {/* Right: perks grid */}
-            <div style={{ display:"grid", gridTemplateColumns:"1fr 1fr", gap:20 }}>
+            <div className="services-why-points" style={{ display:"grid", gridTemplateColumns:"1fr 1fr", gap:20 }}>
               {[
                 { label:"State-of-the-art equipment", accent:"#7c3aed", light:"#f5f3ff" },
                 { label:"Personalised treatment plans", accent:"#0ea5e9", light:"#e0f2fe" },
@@ -448,10 +502,10 @@ export default function ServicesPage() {
         </div>
 
         {/* ── CTA ── */}
-        <div ref={ctaRef} style={{
+        <div ref={ctaRef} className="services-cta-wrap" style={{
           maxWidth:1100, margin:"80px auto 0", padding:"0 24px",
         }}>
-          <div style={{
+          <div className="services-cta-shell" style={{
             background:"linear-gradient(135deg,#4f1d96 0%,#6d28d9 50%,#3b82f6 100%)",
             borderRadius:32, padding:"72px 48px",
             textAlign:"center", position:"relative", overflow:"hidden",

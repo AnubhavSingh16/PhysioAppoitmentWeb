@@ -145,6 +145,36 @@ export default function AboutPage() {
         @keyframes shimmer { 0%{background-position:-200% 0} 100%{background-position:200% 0} }
         .float-anim { animation: float 5s ease-in-out infinite; }
         .pulse-ring { animation: pulse-ring 2s ease-out infinite; }
+        @media (max-width: 768px) {
+          .about-welcome,
+          .about-story {
+            grid-template-columns: 1fr !important;
+            gap: 32px !important;
+            margin-top: 56px !important;
+            padding: 0 16px !important;
+          }
+          .about-welcome-image,
+          .about-story-image {
+            order: 1;
+            max-width: 360px;
+            width: 100%;
+            margin: 0 auto;
+          }
+          .about-welcome-text,
+          .about-story-text {
+            order: 2;
+            text-align: center;
+          }
+          .about-welcome-accent,
+          .about-story-accent {
+            margin-left: auto !important;
+            margin-right: auto !important;
+          }
+          .about-story-point {
+            justify-content: center;
+            text-align: left;
+          }
+        }
       `}</style>
 
       <div className="about-page" style={{ background: "#f8f7ff", minHeight: "100vh" }}>
@@ -187,9 +217,9 @@ export default function AboutPage() {
 
 
         {/* ── WELCOME SECTION ── */}
-        <div ref={welcomeRef} style={{ maxWidth:1100, margin:"80px auto 0", padding:"0 24px", display:"grid", gridTemplateColumns:"1fr 1fr", gap:64, alignItems:"center" }}>
+        <div ref={welcomeRef} className="about-welcome" style={{ maxWidth:1100, margin:"80px auto 0", padding:"0 24px", display:"grid", gridTemplateColumns:"1fr 1fr", gap:64, alignItems:"center" }}>
           {/* Image */}
-          <div style={{
+          <div className="about-welcome-image" style={{
             position:"relative",
             opacity: welcomeIn ? 1 : 0,
             transform: welcomeIn ? "translateX(0)" : "translateX(-40px)",
@@ -225,7 +255,7 @@ export default function AboutPage() {
           </div>
 
           {/* Text */}
-          <div style={{
+          <div className="about-welcome-text" style={{
             opacity: welcomeIn ? 1 : 0,
             transform: welcomeIn ? "translateX(0)" : "translateX(40px)",
             transition: "opacity 0.8s ease 0.15s, transform 0.8s cubic-bezier(0.22,1,0.36,1) 0.15s",
@@ -234,7 +264,7 @@ export default function AboutPage() {
             <h2 style={{ fontSize:"clamp(28px,3.5vw,44px)", color:"#1e1b4b", lineHeight:1.2, margin:"0 0 20px", fontWeight:400 }}>
               Physio Adviser India
             </h2>
-            <div style={{ width:48, height:4, borderRadius:4, background:"linear-gradient(90deg,#7c3aed,#3b82f6)", marginBottom:24 }} />
+            <div className="about-welcome-accent" style={{ width:48, height:4, borderRadius:4, background:"linear-gradient(90deg,#7c3aed,#3b82f6)", marginBottom:24 }} />
             <p style={{ color:"#4b5563", fontSize:16, lineHeight:1.85, margin:"0 0 20px", fontWeight:300 }}>
               Visitors to Physio Adviser India can expect a clean, comfortable, and professional environment. Our team of highly skilled therapists are experts in physiotherapy, occupational therapy, and speech therapy services.
             </p>
@@ -245,9 +275,9 @@ export default function AboutPage() {
         </div>
 
         {/* ── WHO ARE WE — alternate layout ── */}
-        <div ref={whoRef} style={{ maxWidth:1100, margin:"100px auto 0", padding:"0 24px", display:"grid", gridTemplateColumns:"1fr 1fr", gap:64, alignItems:"center" }}>
+        <div ref={whoRef} className="about-story" style={{ maxWidth:1100, margin:"100px auto 0", padding:"0 24px", display:"grid", gridTemplateColumns:"1fr 1fr", gap:64, alignItems:"center" }}>
           {/* Text first on this row */}
-          <div style={{
+          <div className="about-story-text" style={{
             opacity: whoIn ? 1 : 0,
             transform: whoIn ? "translateX(0)" : "translateX(-40px)",
             transition: "opacity 0.8s ease, transform 0.8s cubic-bezier(0.22,1,0.36,1)",
@@ -256,7 +286,7 @@ export default function AboutPage() {
             <h2 style={{ fontSize:"clamp(28px,3.5vw,44px)", color:"#1e1b4b", lineHeight:1.2, margin:"0 0 20px", fontWeight:400 }}>
               Who Are We?
             </h2>
-            <div style={{ width:48, height:4, borderRadius:4, background:"linear-gradient(90deg,#0ea5e9,#10b981)", marginBottom:24 }} />
+            <div className="about-story-accent" style={{ width:48, height:4, borderRadius:4, background:"linear-gradient(90deg,#0ea5e9,#10b981)", marginBottom:24 }} />
             <p style={{ color:"#4b5563", fontSize:16, lineHeight:1.85, margin:"0 0 20px", fontWeight:300 }}>
               Physio Adviser India is a team of highly qualified physiotherapists in Delhi, delivering the highest standards of care since 2011. Our state-of-the-art facilities specialise in Neurology, Orthopaedics, and Sports Physiotherapy.
             </p>
@@ -265,7 +295,7 @@ export default function AboutPage() {
             </p>
             {/* Bullet pills */}
             {["State-of-the-art facilities", "Personalised care plans", "Expert multidisciplinary team"].map((pt, i) => (
-              <div key={i} style={{ display:"flex", alignItems:"center", gap:10, marginBottom:12 }}>
+              <div key={i} className="about-story-point" style={{ display:"flex", alignItems:"center", gap:10, marginBottom:12 }}>
                 <div style={{ width:22, height:22, borderRadius:"50%", background:"#e0f2fe", display:"flex", alignItems:"center", justifyContent:"center", flexShrink:0 }}>
                   <svg width={12} height={12} viewBox="0 0 24 24" fill="#0ea5e9"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg>
                 </div>
@@ -275,7 +305,7 @@ export default function AboutPage() {
           </div>
 
           {/* Image with clipped shape */}
-          <div style={{
+          <div className="about-story-image" style={{
             opacity: whoIn ? 1 : 0,
             transform: whoIn ? "translateX(0)" : "translateX(40px)",
             transition: "opacity 0.8s ease 0.15s, transform 0.8s cubic-bezier(0.22,1,0.36,1) 0.15s",

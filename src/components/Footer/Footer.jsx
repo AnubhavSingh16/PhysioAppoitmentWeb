@@ -55,6 +55,25 @@ export default function Footer() {
         @import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap');
         .footer-root { font-family:'DM Sans',sans-serif; }
         .footer-root h2 { font-family:'DM Serif Display',serif; }
+        .footer-main {
+          max-width:1100px;
+          margin:0 auto;
+          padding:56px 24px 40px;
+          display:grid;
+          grid-template-columns:1.6fr 1fr 1fr 1fr;
+          gap:48px;
+        }
+        .footer-bottom {
+          border-top:1px solid #ede9fe !important;
+          padding:18px 24px !important;
+          max-width:1100px !important;
+          margin:0 auto !important;
+          display:flex !important;
+          align-items:center !important;
+          justify-content:space-between !important;
+          flex-wrap:wrap !important;
+          gap:12px !important;
+        }
         .footer-link {
           font-size:14px; color:#6b7280; text-decoration:none; font-weight:400;
           transition:color 0.18s; display:inline-block; padding:3px 0;
@@ -91,6 +110,30 @@ export default function Footer() {
           transition:opacity 0.18s;
         }
         .sub-btn:hover { opacity:0.88; }
+        @media (max-width: 900px) {
+          .footer-main {
+            grid-template-columns:1fr 1fr;
+            gap:32px;
+          }
+        }
+        @media (max-width: 640px) {
+          .footer-main {
+            padding:40px 16px 28px;
+            grid-template-columns:1fr;
+            gap:28px;
+          }
+          .footer-bottom {
+            padding:16px !important;
+            flex-direction:column !important;
+            align-items:flex-start !important;
+            gap:10px !important;
+          }
+          .footer-bottom-links {
+            display:flex !important;
+            flex-wrap:wrap !important;
+            gap:12px 16px !important;
+          }
+        }
       `}</style>
 
       <footer className="footer-root" style={{
@@ -128,7 +171,7 @@ export default function Footer() {
         </div> */}
 
         {/* ── MAIN FOOTER BODY ── */}
-        <div style={{ maxWidth:1100,margin:"0 auto",padding:"56px 24px 40px",display:"grid",gridTemplateColumns:"1.6fr 1fr 1fr 1fr",gap:48 }}>
+        <div className="footer-main">
 
           {/* Brand column */}
           <div style={{ display:"flex",flexDirection:"column",gap:20 }}>
@@ -192,7 +235,7 @@ export default function Footer() {
         </div>
 
         {/* ── BOTTOM BAR ── */}
-        <div style={{
+        <div className="footer-bottom" style={{
           borderTop:"1px solid #ede9fe",
           padding:"18px 24px",
           maxWidth:1100, margin:"0 auto",
@@ -202,7 +245,7 @@ export default function Footer() {
           <p style={{ fontSize:13,color:"#d1d5db",margin:0,fontWeight:300 }}>
             © {new Date().getFullYear()} YourPhysio. All rights reserved.
           </p>
-          <div style={{ display:"flex",gap:20 }}>
+          <div className="footer-bottom-links" style={{ display:"flex",gap:20 }}>
             {["Privacy Policy","Terms of Service","Cookie Policy"].map(t => (
               <a key={t} href="#" style={{ fontSize:12,color:"#d1d5db",textDecoration:"none",fontWeight:400,transition:"color 0.18s" }}
                 onMouseEnter={e=>e.target.style.color="#7c3aed"}

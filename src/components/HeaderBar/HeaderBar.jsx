@@ -16,10 +16,50 @@ function HeaderBar() {
 
   return (
     <>
+      <style>{`
+        @media (max-width: 767px) {
+          .site-header-shell {
+            top: 10px;
+            padding-left: 12px;
+            padding-right: 12px;
+          }
+          .site-header {
+            border-radius: 18px !important;
+            padding: 12px 14px !important;
+          }
+          .site-header-brand {
+            font-size: 0.98rem !important;
+          }
+        }
+        @media (min-width: 768px) and (max-width: 1080px) {
+          .site-header-shell {
+            padding-left: 18px;
+            padding-right: 18px;
+          }
+          .site-header {
+            padding-left: 18px !important;
+            padding-right: 18px !important;
+          }
+          .site-header-nav {
+            gap: 22px !important;
+            font-size: 13px !important;
+          }
+        }
+      `}</style>
+
+      {isOpen && (
+        <button
+          type="button"
+          aria-label="Close mobile menu overlay"
+          onClick={toggleSidebar}
+          className="fixed inset-0 z-30 bg-slate-900/40 backdrop-blur-[2px] md:hidden"
+        />
+      )}
+
       {/* Outer wrapper: full-width, centered, sticky */}
-      <div className="fixed top-4 left-0 right-0 z-30 flex justify-center pointer-events-none">
+      <div className="site-header-shell fixed top-3 left-0 right-0 z-40 flex justify-center px-3 sm:top-4 sm:px-4 pointer-events-none">
         <header
-          className="pointer-events-auto w-[80%] rounded-2xl px-6 py-3 shadow-lg"
+          className="site-header pointer-events-auto relative w-full max-w-[1100px] rounded-2xl px-4 py-3 shadow-lg sm:px-5 md:px-6"
           style={{
             background: "rgba(255, 255, 255, 0.55)",
             backdropFilter: "blur(16px)",
@@ -30,16 +70,16 @@ function HeaderBar() {
         >
           <div className="flex justify-between items-center">
             {/* Left side: Logo */}
-            <div className="flex-shrink-0 text-xl sm:text-2xl md:text-2xl flex items-center space-x-2 cursor-default font-semibold tracking-tight text-gray-800">
+            <div className="site-header-brand flex-shrink-0 text-base sm:text-xl md:text-2xl flex items-center space-x-2 cursor-default font-semibold tracking-tight text-gray-800">
               <span>YourPhysio</span>
               <FontAwesomeIcon
                 icon={faStethoscope}
-                className="text-purple-600 text-lg sm:text-xl"
+                className="text-purple-600 text-base sm:text-xl"
               />
             </div>
 
             {/* Center: Navigation */}
-            <ul className="hidden md:flex flex-grow justify-center space-x-8 text-sm font-medium text-gray-600">
+            <ul className="site-header-nav hidden lg:flex flex-grow justify-center gap-8 text-sm font-medium text-gray-600">
               <li className="relative group cursor-pointer">
                 <Link to="/" className="hover:text-purple-700 transition-colors">
                   Home
@@ -71,7 +111,7 @@ function HeaderBar() {
             </ul>
 
             {/* Right side: CTA Button */}
-            <div className="hidden md:block">
+            <div className="hidden lg:block">
               <Link to="/book-appointment">
                 <button className="bg-gradient-to-r from-purple-600 to-blue-400 text-white px-6 py-2 text-sm rounded-full hover:opacity-90 transition-opacity shadow-md shadow-purple-200">
                   Book Appointment
@@ -82,33 +122,43 @@ function HeaderBar() {
             {/* Mobile Menu Button */}
             <button
               onClick={toggleSidebar}
-              className="md:hidden text-gray-700 text-xl"
+              className="lg:hidden inline-flex h-10 w-10 items-center justify-center rounded-full border border-purple-200 bg-white/70 text-gray-700 text-lg"
             >
-              <FontAwesomeIcon icon={faBars} />
+              <FontAwesomeIcon icon={isOpen ? faTimes : faBars} />
             </button>
           </div>
 
           {/* Sidebar for mobile */}
           {isOpen && (
-            <div className="absolute top-0 right-0 w-1/2 h-screen bg-black bg-opacity-80 z-40 flex flex-col items-center pl-10 pt-20 rounded-r-2xl">
-              <button
-                onClick={toggleSidebar}
-                className="absolute text-xl top-5 right-5 text-white"
-              >
-                <FontAwesomeIcon icon={faTimes} size="lg" />
-              </button>
-              <ul className="flex flex-col space-y-6 text-white text-xl">
-                <li className="hover:underline">
-                  <Link to="/" onClick={toggleSidebar}>Home</Link>
+            <div className="absolute left-0 right-0 top-[calc(100%+0.75rem)] rounded-2xl border border-purple-200 bg-white/95 p-4 shadow-2xl backdrop-blur lg:hidden">
+              <ul className="flex flex-col gap-2 text-gray-800">
+                <li>
+                  <Link to="/" onClick={toggleSidebar} className="block rounded-xl px-4 py-3 text-base font-medium hover:bg-purple-50">
+                    Home
+                  </Link>
                 </li>
-                <li className="hover:underline">
-                  <Link to="/contact-us" onClick={toggleSidebar}>Contact Us</Link>
+                <li>
+                  <Link to="/contact-us" onClick={toggleSidebar} className="block rounded-xl px-4 py-3 text-base font-medium hover:bg-purple-50">
+                    Contact Us
+                  </Link>
                 </li>
-                <li className="hover:underline">
-                  <Link to="/about-us" onClick={toggleSidebar}>About</Link>
+                <li>
+                  <Link to="/about-us" onClick={toggleSidebar} className="block rounded-xl px-4 py-3 text-base font-medium hover:bg-purple-50">
+                    About
+                  </Link>
                 </li>
-                <li className="hover:underline">Services</li>
+                <li>
+                  <Link to="/all-services" onClick={toggleSidebar} className="block rounded-xl px-4 py-3 text-base font-medium hover:bg-purple-50">
+                    Services
+                  </Link>
+                </li>
               </ul>
+
+              <Link to="/book-appointment" onClick={toggleSidebar} className="mt-4 block">
+                <button className="w-full rounded-full bg-gradient-to-r from-purple-600 to-blue-400 px-5 py-3 text-sm font-semibold text-white shadow-md shadow-purple-200">
+                  Book Appointment
+                </button>
+              </Link>
             </div>
           )}
         </header>

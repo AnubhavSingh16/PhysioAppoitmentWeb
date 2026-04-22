@@ -55,13 +55,13 @@ function Care() {
   return (
     <section
       ref={ref}
-      className="relative overflow-hidden py-24 px-6 md:px-16"
+      className="relative overflow-hidden px-4 py-14 sm:px-6 sm:py-16 md:px-10 lg:px-16 lg:py-24"
     >
       {/* Decorative blobs */}
       <div className="absolute -top-20 -right-20 w-80 h-80 rounded-full bg-purple-100 opacity-50 blur-3xl pointer-events-none" />
       <div className="absolute -bottom-16 -left-16 w-72 h-72 rounded-full bg-blue-100 opacity-40 blur-3xl pointer-events-none" />
 
-      <div className="relative max-w-5xl mx-auto flex flex-col items-center gap-16">
+      <div className="relative max-w-5xl mx-auto flex flex-col items-center gap-10 sm:gap-12 lg:gap-16">
 
         {/* ── HERO BANNER ── */}
         <div
@@ -83,7 +83,7 @@ function Care() {
           <div className="absolute bottom-10 left-20 w-2 h-2 rounded-full bg-blue-300 opacity-60" />
 
           {/* Content */}
-          <div className="relative z-10 px-8 py-14 md:px-16 md:py-16 text-center">
+          <div className="relative z-10 px-5 py-10 sm:px-8 sm:py-12 md:px-16 md:py-16 text-center">
             {/* Badge */}
             <div className="inline-flex items-center gap-2 bg-white/15 backdrop-blur border border-white/20 rounded-full px-4 py-1.5 mb-6">
               <span className="w-2 h-2 rounded-full bg-purple-300 animate-pulse" />
@@ -92,17 +92,17 @@ function Care() {
               </span>
             </div>
 
-            <h2 className="text-3xl md:text-5xl font-extrabold text-white leading-tight mb-5 tracking-tight">
+            <h2 className="text-2xl sm:text-3xl md:text-5xl font-extrabold text-white leading-tight mb-4 sm:mb-5 tracking-tight">
               We Care About You &{" "}
               <span className="text-purple-200">Your Health</span>
             </h2>
-            <p className="text-white/75 text-base md:text-lg leading-relaxed max-w-2xl mx-auto mb-8">
+            <p className="text-white/75 text-sm sm:text-base md:text-lg leading-relaxed max-w-2xl mx-auto mb-7 sm:mb-8">
               Our mission is to ensure your well-being by providing top-notch care,
               personalized treatment plans, and a network of experienced professionals
               dedicated to your health and happiness.
             </p>
             <Link to="/care">
-              <button className="inline-flex items-center gap-2 bg-white text-purple-700 font-bold px-8 py-3.5 rounded-full shadow-lg hover:shadow-purple-300 hover:scale-105 transition-all duration-200 text-sm tracking-wide">
+              <button className="inline-flex w-full justify-center sm:w-auto items-center gap-2 bg-white text-purple-700 font-bold px-6 sm:px-8 py-3.5 rounded-full shadow-lg hover:shadow-purple-300 hover:scale-105 transition-all duration-200 text-sm tracking-wide">
                 Learn More
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
@@ -113,11 +113,11 @@ function Care() {
         </div>
 
         {/* ── FEATURE CARDS ── */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 w-full">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 w-full">
           {cards.map((card, i) => (
             <div
               key={i}
-              className={`group relative bg-white rounded-2xl p-7 border border-purple-100 shadow-sm hover:shadow-xl hover:shadow-purple-100 hover:-translate-y-1 transition-all duration-300 overflow-hidden ${
+                className={`group relative bg-white rounded-2xl p-5 sm:p-7 border border-purple-100 shadow-sm hover:shadow-xl hover:shadow-purple-100 hover:-translate-y-1 transition-all duration-300 overflow-hidden ${
                 visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
               }`}
               style={{ transitionDelay: `${200 + i * 100}ms` }}
@@ -128,22 +128,22 @@ function Care() {
               {/* Hover bg glow */}
               <div className="absolute inset-0 bg-gradient-to-br from-purple-50/0 to-purple-50/0 group-hover:from-purple-50/60 group-hover:to-blue-50/40 transition-all duration-300 rounded-2xl pointer-events-none" />
 
-              <div className="relative z-10 flex items-start gap-5">
+              <div className="relative z-10 flex items-start gap-4 sm:gap-5">
                 {/* Icon */}
                 <div
-                  className="flex-shrink-0 w-13 h-13 rounded-2xl flex items-center justify-center p-3.5 shadow-sm"
+                  className="flex-shrink-0 h-12 w-12 sm:h-14 sm:w-14 rounded-2xl flex items-center justify-center p-3 shadow-sm"
                   style={{ backgroundColor: card.bg }}
                 >
                   <FontAwesomeIcon
                     icon={card.icon}
                     style={{ color: card.color }}
-                    className="text-xl"
+                    className="text-lg sm:text-xl"
                   />
                 </div>
 
                 {/* Text */}
                 <div>
-                  <h3 className="text-base font-bold text-gray-900 mb-1.5 group-hover:text-purple-700 transition-colors duration-200">
+                  <h3 className="text-sm sm:text-base font-bold text-gray-900 mb-1.5 group-hover:text-purple-700 transition-colors duration-200">
                     {card.title}
                   </h3>
                   <p className="text-gray-500 text-sm leading-relaxed">{card.desc}</p>
