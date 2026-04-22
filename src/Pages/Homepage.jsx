@@ -1,4 +1,4 @@
-import React from 'react'
+import React from "react";
 import Header from '../components/Header/Header'
 import Labelitem from '../components/Labelitem/Labelitem'
 import Offer from '../components/Offer/Offer'
